@@ -71,18 +71,21 @@ if __name__=="__main__":
     while True:
 
         try:
+            # Collect the values from the potentiometer and the ultrasonic ranger
             sensor_value = grovepi.analogRead(potentiometer)
             val = grovepi.ultrasonicRead(ultrasonic_ranger)
 
             sentence = ""
-
+            
+            # Compare the value from the ultrasonic ranger and the potentiometer and output on the LCD appropriately
             if (val<sensor_value):
                 sentence = " " + str(sensor_value) + "cm OBJ PRES" + "\n" + " " + str(val) + "cm"
             else:
                 sentence = " " + str(sensor_value) + "cm         " + "\n" + " " + str(val) + "cm"
             
             setText_norefresh(sentence)
-
+            
+            # Compare the values and set the color appropriately
             if (val<sensor_value):
                 setRGB(255,0,0) # Turns the LCD red 
             else:
